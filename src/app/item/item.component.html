@@ -1,0 +1,4 @@
+<app-item-detail [item]="todayItem" (newItem)="addItem($event)"></app-item-detail>
+<div *ngFor="let item of items">
+  <p>{{item}}</p>
+</div>
