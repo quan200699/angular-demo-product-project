@@ -1,0 +1,25 @@
+<form #productForm="ngForm" (ngSubmit)="submit(productForm)">
+  <table>
+    <tr>
+      <td>Id:</td>
+      <td><input type="text" name="id" [(ngModel)]="product.id"></td>
+    </tr>
+    <tr>
+      <td>Name:</td>
+      <td><input type="text" #name="ngModel" name="name" [(ngModel)]="product.name" required></td>
+    </tr>
+    <tr><p *ngIf="name?.errors?.required">Trường này phải được điền đủ</p></tr>
+    <tr>
+      <td>Price</td>
+      <td><input type="text" name="price" [(ngModel)]="product.price"></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><button>Submit</button></td>
+    </tr>
+  </table>
+</form>
+<h1>Thông tin sản phẩm</h1>
+<p>id: {{product.id}}</p>
+<p>name: {{product.name}}</p>
+<p>price: {{product.price}}</p>
