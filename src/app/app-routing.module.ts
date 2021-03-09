@@ -12,9 +12,6 @@ const routes: Routes = [
   {
     path: 'list',
     component: ProductComponent
-  },
-  {
-    path: ''
   }
 ];
 
