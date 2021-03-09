@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Product} from '../product';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ProductService} from '../service/product.service';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 
 @Component({
   selector: 'app-create-product',
@@ -14,15 +15,24 @@ export class CreateProductComponent implements OnInit {
     price: new FormControl(0)
   });
 
-  constructor() {
+  constructor(private productService: ProductService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
+      console.log(paramMap.get('id'));
+    });
+  }
+
+  get name() {
+    return this.productForm.get('name');
   }
 
   ngOnInit() {
   }
 
   submit() {
-    console.log(this.productForm.value);
+    let product = this.productForm.value;
+    this.productService.saveProduct(product);
+    this.router.navigate(['/list']);
   }
-
-  get name() { return this.productForm.get('name'); }
 }

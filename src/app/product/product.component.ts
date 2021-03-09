@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Product} from '../product';
+import {Product} from '../model/product';
+import {ProductService} from '../service/product.service';
 
 @Component({
   selector: 'app-product',
@@ -9,26 +10,20 @@ import {Product} from '../product';
 export class ProductComponent implements OnInit {
   product: Product = {};
   status = false;
-  products: Product[] = [
-    {
-      id: 1,
-      name: 'Iphone',
-      price: 100000
-    },
-    {
-      id: 2,
-      name: 'Iphone11',
-      price: 100000000
-    }];
+  products: Product[] = [];
   displayedColumns: string[] = ['id', 'name', 'price'];
-  constructor() {
+  constructor(private productService: ProductService) {
   }
 
   ngOnInit() {
+    this.getAll();
   }
 
   onClick() {
     this.status = !this.status;
   }
 
+  getAll(){
+    this.products = this.productService.getAll();
+  }
 }
