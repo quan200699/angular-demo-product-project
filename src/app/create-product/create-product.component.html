@@ -1,17 +1,17 @@
-<form #productForm="ngForm" (ngSubmit)="submit(productForm)">
+<form [formGroup]="productForm" (ngSubmit)="submit()">
   <table>
     <tr>
       <td>Id:</td>
-      <td><input type="text" name="id" [(ngModel)]="product.id"></td>
+      <td><input type="text" formControlName="id"></td>
     </tr>
     <tr>
       <td>Name:</td>
-      <td><input type="text" #name="ngModel" name="name" [(ngModel)]="product.name" required></td>
+      <td><input type="text" formControlName="name"></td>
     </tr>
-    <tr><p *ngIf="name?.errors?.required">Trường này phải được điền đủ</p></tr>
+    <tr><p *ngIf="name?.errors?.required">Trường này bắt buộc phải nhập</p></tr>
     <tr>
       <td>Price</td>
-      <td><input type="text" name="price" [(ngModel)]="product.price"></td>
+      <td><input type="text" formControlName="price"></td>
     </tr>
     <tr>
       <td></td>
@@ -19,7 +19,3 @@
     </tr>
   </table>
 </form>
-<h1>Thông tin sản phẩm</h1>
-<p>id: {{product.id}}</p>
-<p>name: {{product.name}}</p>
-<p>price: {{product.price}}</p>

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Product} from '../product';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-create-product',
@@ -7,11 +8,11 @@ import {Product} from '../product';
   styleUrls: ['./create-product.component.css']
 })
 export class CreateProductComponent implements OnInit {
-  product: Product = {
-    id: 1,
-    name: '',
-    price: 1200000
-  };
+  productForm: FormGroup = new FormGroup({
+    id: new FormControl(0),
+    name: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    price: new FormControl(0)
+  });
 
   constructor() {
   }
@@ -19,6 +20,9 @@ export class CreateProductComponent implements OnInit {
   ngOnInit() {
   }
 
-  submit(form) {
+  submit() {
+    console.log(this.productForm.value);
   }
+
+  get name() { return this.productForm.get('name'); }
 }
