@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {ProductService} from '../service/product.service';
+import {ProductService} from '../../service/product.service';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 
 @Component({
@@ -10,17 +10,11 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 })
 export class CreateProductComponent implements OnInit {
   productForm: FormGroup = new FormGroup({
-    id: new FormControl(0),
     name: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    price: new FormControl(0)
+    price: new FormControl(0),
   });
 
-  constructor(private productService: ProductService,
-              private router: Router,
-              private activatedRoute: ActivatedRoute) {
-    this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
-      console.log(paramMap.get('id'));
-    });
+  constructor(private productService: ProductService) {
   }
 
   get name() {
@@ -32,7 +26,13 @@ export class CreateProductComponent implements OnInit {
 
   submit() {
     let product = this.productForm.value;
-    this.productService.saveProduct(product);
-    this.router.navigate(['/list']);
+    product.category = {
+      id: this.productForm.value.category
+    }
+    this.productService.createNewProduct(product).subscribe(() => {
+      alert("Tạo thành công");
+    }, () => {
+      alert("Tạo thất bại")
+    });
   }
 }

@@ -1,0 +1,18 @@
+<a routerLink="../list">Danh sach san pham</a>
+<form [formGroup]="productForm" (ngSubmit)="submit()">
+  <table>
+    <tr>
+      <td>Name:</td>
+      <td><input type="text" formControlName="name"></td>
+    </tr>
+    <tr><p *ngIf="name?.errors?.required">Trường này bắt buộc phải nhập</p></tr>
+    <tr>
+      <td>Price</td>
+      <td><input type="text" formControlName="price"></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><button>Submit</button></td>
+    </tr>
+  </table>
+</form>
