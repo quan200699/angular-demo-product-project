@@ -14,7 +14,8 @@ export class CreateProductComponent implements OnInit {
     price: new FormControl(0),
   });
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService,
+              private router: Router) {
   }
 
   get name() {
@@ -31,6 +32,7 @@ export class CreateProductComponent implements OnInit {
     }
     this.productService.createNewProduct(product).subscribe(() => {
       alert("Tạo thành công");
+      this.router.navigate(['/']);
     }, () => {
       alert("Tạo thất bại")
     });
